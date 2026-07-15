@@ -1,0 +1,12 @@
+{
+  "host_name": "FPS32B",
+  "seri_number": "26010",
+  "version": "v1.0.0",
+  "ssid": "Ky Thuat",
+  "password": "phusagenomics",
+  "role": "staff",
+  "servers": [
+    "SPOTCHECK",
+    "PCR"
+  ]
+}

@@ -1,0 +1,243 @@
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  gap: 0;
+
+  margin: 8px 0;              /* cách header & footer */
+  padding: 0 8px;             /* thoáng hai bên */
+}
+
+
+/* =========================================================
+   FORM CONTAINER
+========================================================= */
+.form-container {
+  width: 100%;
+  max-width: 480px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;                  /* theo template */
+
+  background: var(--container-bg);
+  padding: 20px;
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  margin: 8px auto;            /* căn giữa, cách đều */
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+.form-group {
+  display: flex;
+  flex-direction: column; 
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-main);
+}
+
+
+/* =========================================================
+   INPUT FIELD
+========================================================= */
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 8px;
+  border: 1px solid var(--container-border-color);
+
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--input-text);
+  font-size: 0.95rem;
+
+  transition: all 0.25s ease;
+}
+
+.form-group input[type="text"]:focus {
+  border-color: var(--gradient-end);
+  box-shadow: 0 0 6px rgba(0, 242, 255, 0.825);
+  outline: none;
+}
+
+/* Màu mặc định cho folder */
+.folder-icon {
+    color: #f39c12; /* Màu vàng của thư mục */
+}
+
+/* Màu riêng cho icon file JSON */
+.json-file-icon {
+    color: #34fdf0 !important; /* Màu xanh dương hoặc bất kỳ màu nào bạn muốn */
+}
+
+/* Tùy chọn: Thêm hiệu ứng hover để làm nổi bật */
+.result-item:hover .json-file-icon {
+    color: #05c4ad !important; /* Đổi màu khi di chuột vào */
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Tablet / mobile landscape */
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 100%;
+    padding: 16px 18px;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 14px;
+    border-radius: 8px;
+  }
+
+  .form-group input[type="text"] {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* Bổ sung load PCR data */
+/* Container Grid */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 15px;
+  padding: 10px;
+  width: 100%;
+  overflow-y: auto; /* Cho phép cuộn riêng vùng danh sách */
+  flex: 1;          /* Chiếm hết không gian còn lại */
+}
+
+
+/* Item trong Grid */
+.result-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.result-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.result-item .folder-icon {
+  font-size: 2rem;
+  color: #f1c40f; /* Màu vàng biểu tượng folder */
+  margin-bottom: 8px;
+}
+
+.result-item .folder-name {
+  font-size: 0.8rem;
+  word-break: break-all;
+  text-align: center;
+  color: #fff;
+}
+
+/* Fix Modal: Đảm bảo z-index cao và căn giữa */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; 
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 1);
+  z-index: 9999; /* Đảm bảo đè lên mọi thứ */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between; /* Đẩy tiêu đề sang trái, nút sang phải */
+  align-items: center;            /* Căn giữa theo chiều dọc */
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;  /* Đường kẻ phân cách */
+}
+
+
+/* Nội dung Modal */
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column; /* Quan trọng để grid giãn theo chiều dọc */
+}
+
+
+
+/* Style cho nút Close gọn hơn để hợp với header */
+.btn-close-modal {
+  padding: 6px 15px;
+  background: #ffff;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* .btn-close-modal:hover {
+
+  background: #cc0000;
+
+} */
+
+.btn-back-modal {
+  padding: 6px 10px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-back-modal:hover { background: #666; }
+
+.back-btn {
+    background: rgba(255, 165, 0, 0.2) !important;
+    border: 1px solid orange !important;
+}
+.back-btn .folder-icon i {
+    color: orange;
+}

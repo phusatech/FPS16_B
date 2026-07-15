@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS32B - Spotcheck 26001</title>
+
+  <!-- ================= STYLES ================= -->
+  <link rel="stylesheet" href="/assets/fontawesome-7.1.0/css/all.min.css">
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./general_style.css">
+
+  <link rel="manifest" href="/assets/icon/manifest.json">
+  <link rel="icon" href="/assets/icon/icon.ico">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="titlebar-top">
+      <span class="titlebar-version">SPOTCHECK</span>
+
+      <!-- Language Switch -->
+      <select id="langSelect" class="lang-select">
+        <option value="vi">VI</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+
+    <div class="titlebar-bottom">
+      <span class="titlebar-page" id="homeBtn">
+        <i class="fa-solid fa-house"></i>
+        <span data-i18n="HEADER_HOME"></span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+    <div class="main-content">
+
+      <!-- popup message -->
+      <div id="popupMessage" class="popup hidden">
+        <span id="popupText"></span>
+      </div>
+
+      <!-- analysis -->
+      <button class="main-button" id="btnAnalysis">
+        <span class="icon">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_ANALYSIS"></span>
+      </button>
+
+      <!-- optical inspection -->
+      <button class="main-button" id="btnFam">
+        <span class="icon">
+          <i class="fa-solid fa-vials"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_OPTICAL_INSPECTION"></span>
+      </button>
+
+      <!-- system check -->
+      <button class="main-button" id="btnSystemCheck">
+        <span class="icon">
+          <i class="fa-solid fa-list-check"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_SYSTEM_CHECK"></span>
+      </button>
+
+      <!-- kit management -->
+      <button class="main-button" id="btnSetting">
+        <span class="icon">
+          <i class="fa-solid fa-gear"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_SETTING"></span>
+      </button>
+
+      <!-- sample file management -->
+      <button class="main-button" id="btnSampleFile">
+        <span class="icon">
+          <i class="fa-solid fa-file"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_MANAGE_SAMPLE_FILES"></span>
+      </button>
+
+      <!-- results -->
+      <button class="main-button" id="btnResults">
+        <span class="icon">
+          <i class="fa-solid fa-square-poll-horizontal"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_RESULTS"></span>
+      </button>
+
+      <!-- email -->
+      <button class="main-button" id="btnEmail">
+        <span class="icon">
+          <i class="fa-solid fa-envelope"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_EMAIL"></span>
+      </button>
+
+      <!-- wifi -->
+      <button class="main-button" id="btnWifi">
+        <span class="icon">
+          <i class="fa-solid fa-wifi"></i>
+        </span>
+        <span class="text" data-i18n="BUTTON_WIFI"></span>
+      </button>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; PHUSA - FPS</p>
+
+      <!--
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+      -->
+    </div>
+  </footer>
+
+  <!-- ================= ANALYSIS MODE DIALOG ================= -->
+  <div id="overlay">
+    <div class="dialog">
+
+      <button class="close-button" id="btnCloseDialog">×</button>
+
+      <h3 data-i18n="POPUP_ANALYSIS_MODE"></h3>
+
+      <button
+        class="mode mode1"
+        type="button"
+        id="btnHighSensitivity"
+        data-i18n="BUTTON_HIGH_SENSITIVITY"
+      >
+      </button>
+
+      <button
+        class="mode mode2"
+        type="button"
+        id="btnLowSensitivity"
+        data-i18n="BUTTON_LOW_SENSITIVITY"
+      >
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./Navigation/nav.js"></script>
+  <script src="index.js"></script>
+  <script src="./lang/i18n.js"></script>
+
+</body>
+</html>

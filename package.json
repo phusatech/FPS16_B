@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "axios": "^1.14.0",
+    "express": "^5.1.0",
+    "glob": "^13.0.6",
+    "javascript-obfuscator": "^5.4.7",
+    "modbus-serial": "^8.0.23",
+    "nodemailer": "^7.0.11",
+    "rpio": "^2.4.2",
+    "serialport": "^13.0.0",
+    "socket.io": "^4.8.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.44.1"
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR</title>
+  <link rel="apple-touch-icon"      sizes="32x32" href="../../assets/ICON.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/ICON.png">
+
+  <link rel="stylesheet" href="../PCR_Elements/style.css">
+  <link rel="stylesheet" href="/PCR/features/PCR_Base/pcr_base.css">
+</head>
+<body>
+
+  <!-- Loading overlay — shown until role is received -->
+  <div id="base-loading" class="base-loading">
+    <div class="base-spinner"></div>
+  </div>
+
+  <main class="pcr-main" id="pcr-main" style="visibility:hidden">
+    <button class="pcr-btn" id="btn-saved" onclick="OpenTab('SAVED')">
+      <img src="../../assets/PCR_SAVED.png" alt="SAVED" class="btn-icon">
+      SAVED PROTOCOL
+    </button>    
+    <button class="pcr-btn" onclick="OpenTab('NEW')">
+      <img src="../../assets/PCR_NEW.png" alt="NEW" class="btn-icon">
+      NEW PROTOCOL
+    </button>
+    <button class="pcr-btn" onclick="OpenTab('HISTORY')">
+      <img src="../../assets/PCR_HISTORY.png" alt="HISTORY" class="btn-icon">
+      HISTORY
+    </button>
+    <button class="pcr-btn" id="btn-analysis" onclick="OpenTab('RUN_REVIEW')">
+      <img src="../../assets/PCR_ANALYSIS.png" alt="ANALYSIS" class="btn-icon">
+      ANALYSIS
+    </button>
+    <button class="pcr-btn" onclick="OpenTab('ADMIN')">
+      <img src="../../assets/PCR_ADMIN.png" alt="ADMIN" class="btn-icon">
+      ADMIN
+    </button>
+  
+  </main>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../../components/header/header.js"></script> 
+  <script type="module" src="../../core/socket_client.js"></script>
+  <script src="../../shared/Handle.js"></script>
+
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script src="/PCR/features/PCR_Base/pcr_base.js"></script>
+</body>
+</html>

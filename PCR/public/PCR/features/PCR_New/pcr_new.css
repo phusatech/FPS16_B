@@ -1,0 +1,954 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #090d16;
+}
+
+:root {
+    --pcr-bg-main: #090d16;
+}
+
+
+.pcr-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  /* Match Base tab background */
+  background: radial-gradient(circle at 50% 40%, #0f1a2f 0%, #070b14 60%, #02040a 100%);
+}
+
+/* Ambient orb glow — same as Base tab */
+.pcr-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.32), transparent 38%),
+    radial-gradient(circle at 80% 70%, rgba(34,211,238,0.25), transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(59,130,246,0.18), transparent 55%);
+  animation: newLuxFloat 5s ease-in-out infinite;
+}
+@keyframes newLuxFloat {
+  0%,100% { opacity: 0.7; transform: none; }
+  50%     { opacity: 1;   transform: translateY(-4px); }
+}
+
+.pcr-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  height: 100%;
+  width: 96%;
+  max-width: 700px;
+  min-width: 200px;
+  min-height: 620px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.new-progam-chart-container{
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.steps-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #0d1b30;
+}
+
+.chart-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  background-color: #0d1b30;
+  overflow: hidden;
+  justify-content: center;
+  border: 1px solid rgba(148,163,184,0.12);
+  flex-direction: column;
+}
+
+/* Trục Y chiếm 10% */
+#Temp-Y {
+  min-width: 30px;      
+  max-width: 80px;    
+  flex-shrink: 0;
+  background: #c4c4c4;
+}
+
+/* Hàng ngang */
+.chart-row {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+  overflow-x: auto;  
+  overflow-y: hidden;
+}
+
+.chart-scroll {
+    flex: 1; 
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* scroll do chart tự xử lý */
+}
+
+.tool-container{
+  height: 20%;
+  width:  100%;
+  background-color: transparent;
+}
+
+#Temp-Chart { 
+  width: 100%;
+  height: 100%;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.chart-label {
+    height: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #94a3b8;
+    user-select: none;
+    background-color: #0d1b30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 8px;
+}
+
+.label-Sample-Temp {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* .zoom-group {
+    display: flex;
+    gap: 5px;
+    position: absolute;
+    right: 8px; 
+} */
+
+.zoom-group {
+    display: flex;
+    gap: 5px;
+    position: absolute;
+    left: 8px;   /* 👉 chuyển sang trái */
+}
+
+.zoom-btn {
+    padding: 4px;
+    border: 1px solid rgba(148,163,184,0.15);
+    border-radius: 4px;
+    background-color: rgba(148,163,184,0.07);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    filter: invert(1) brightness(0.6);
+}
+
+.zoom-icon {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.zoom-btn:active {
+    background-color: rgba(148,163,184,0.18);
+}
+
+
+
+
+
+/* =======================================================
+   HEADER INFO BUTTON
+======================================================= */
+/* 
+.header-info-btn
+{
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.header-info-btn:hover
+{
+    background: rgba(255,255,255,.08);
+
+    border-radius: 8px;
+}
+
+.header-info-btn img
+{
+    width: 24px;
+    height: 24px;
+
+    object-fit: contain;
+
+    filter:
+        brightness(0)
+        invert(1)
+        contrast(300%);
+}
+
+.protocol-drawer
+{
+    position: fixed;
+
+    top: 50px;
+    right: -420px;
+
+    width: 420px;
+    height: calc(100vh - 50px);
+
+    background: #111827;
+
+    border-left:
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        -10px 0 40px rgba(0,0,0,.45);
+
+    transition: right .3s ease;
+
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.protocol-drawer.show
+{
+    right: 0;
+}
+
+.drawer-header
+{
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    flex-shrink: 0;
+}
+
+.drawer-header span
+{
+    color: white;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.drawer-header button
+{
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+.drawer-header button:hover
+{
+    background: rgba(255,255,255,.08);
+
+    border-radius: 6px;
+}
+
+.drawer-content
+{
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 15px;
+}
+
+.info-card
+{
+    background: rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.05);
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+}
+
+.info-card label
+{
+    display: block;
+
+    color: #9CA3AF;
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+.info-card span
+{
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+.notification-section
+{
+    margin-top: 20px;
+}
+
+.section-title
+{
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    margin-bottom: 12px;
+}
+
+.notification-item
+{
+    background:
+        rgba(255,70,70,.08);
+
+    border-left:
+        4px solid #EF4444;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    margin-bottom: 10px;
+}
+
+.notification-code
+{
+    color: #F87171;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.notification-message
+{
+    color: #D1D5DB;
+
+    margin-top: 6px;
+
+    line-height: 1.5;
+}
+
+.drawer-content::-webkit-scrollbar
+{
+    width: 8px;
+}
+
+.drawer-content::-webkit-scrollbar-track
+{
+    background: transparent;
+}
+
+.drawer-content::-webkit-scrollbar-thumb
+{
+    background: rgba(255,255,255,.15);
+
+    border-radius: 4px;
+}
+
+@media (max-width:1024px)
+{
+    .protocol-drawer
+    {
+        width: 340px;
+        right: -340px;
+    }
+}
+
+
+@media (max-width:768px)
+{
+    .protocol-drawer
+    {
+        width: 90vw;
+        right: -90vw;
+    }
+
+    .drawer-header
+    {
+        height: 56px;
+    }
+
+    .drawer-header span
+    {
+        font-size: 16px;
+    }
+
+    .info-card span
+    {
+        font-size: 15px;
+    }
+
+    .header-info-btn
+    {
+        width: 38px;
+        height: 38px;
+        right: 8px;
+    }
+
+    .header-info-btn img
+    {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width:300px)
+{
+    .protocol-drawer
+    {
+        width: 100vw;
+        right: -100vw;
+    }
+
+    .drawer-content
+    {
+        padding: 12px;
+    }
+
+    .info-card
+    {
+        padding: 12px;
+    }
+}
+
+.protocol-overlay
+{
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    backdrop-filter: blur(4px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .25s;
+
+    z-index: 99998;
+}
+
+.protocol-overlay.show
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.protocol-drawer
+{
+    z-index: 99999;
+} */
+
+
+/* =======================================================
+   INFO BUTTON
+======================================================= */
+
+.header-info-btn
+{
+    position: absolute;
+
+    top: 50%;
+    right: 12px;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.header-info-btn:hover
+{
+    background: rgba(255,255,255,.08);
+
+    border-radius: 8px;
+}
+
+.header-info-btn img
+{
+    width: 24px;
+    height: 24px;
+
+    object-fit: contain;
+
+    filter:
+        brightness(0)
+        invert(1)
+        contrast(300%);
+}
+
+/* =======================================================
+   OVERLAY
+======================================================= */
+
+.protocol-overlay
+{
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0,0,0,.65);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+    z-index: 99998;
+}
+
+.protocol-overlay.show
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =======================================================
+   DRAWER
+======================================================= */
+
+.protocol-drawer
+{
+    position: fixed;
+
+    top: 50px;
+    right: -360px;
+
+    width: 360px;
+    height: calc(100vh - 50px);
+
+    background: #111827;
+
+    border-left:
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        -10px 0 40px rgba(0,0,0,.45);
+
+    display: flex;
+    flex-direction: column;
+
+    transition:
+        right .3s ease;
+
+    z-index: 99999;
+}
+
+.protocol-drawer.show
+{
+    right: 0;
+}
+
+/* =======================================================
+   HEADER
+======================================================= */
+
+.drawer-header
+{
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    flex-shrink: 0;
+}
+
+.drawer-header span
+{
+    color: white;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.drawer-header button
+{
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.drawer-header button:hover
+{
+    background: rgba(255,255,255,.08);
+
+    border-radius: 6px;
+}
+
+/* =======================================================
+   CONTENT
+======================================================= */
+
+.drawer-content
+{
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 15px;
+}
+
+/* =======================================================
+   CARD
+======================================================= */
+
+.info-card
+{
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.05);
+}
+
+.info-card label
+{
+    display: block;
+
+    font-size: 12px;
+
+    color: #9CA3AF;
+
+    margin-bottom: 4px;
+}
+
+.info-card span
+{
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: white;
+}
+
+/* =======================================================
+   NOTIFICATION
+======================================================= */
+
+.notification-section
+{
+    margin-top: 20px;
+}
+
+/* .section-title
+{
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: white;
+} */
+
+.section-title
+{
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #FFFFFF;
+
+    letter-spacing: 0.5px;
+}
+.notification-item
+{
+    padding: 12px;
+
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(239,68,68,.08);
+
+    border-left:
+        4px solid #EF4444;
+}
+
+.notification-code
+{
+    color: #F87171;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.notification-message
+{
+    margin-top: 6px;
+
+    color: #D1D5DB;
+
+    line-height: 1.5;
+}
+
+/* =======================================================
+   SCROLLBAR
+======================================================= */
+
+.drawer-content::-webkit-scrollbar
+{
+    width: 6px;
+}
+
+.drawer-content::-webkit-scrollbar-thumb
+{
+    background: rgba(255,255,255,.15);
+
+    border-radius: 4px;
+}
+
+/* =======================================================
+   TABLET
+======================================================= */
+
+@media (max-width:1024px)
+{
+    .protocol-drawer
+    {
+        width: 320px;
+        right: -320px;
+    }
+}
+
+/* =======================================================
+   MOBILE
+======================================================= */
+
+@media (max-width:768px)
+{
+    .protocol-drawer
+    {
+        width: 78vw;
+        right: -78vw;
+    }
+
+    .drawer-header
+    {
+        height: 56px;
+    }
+
+    .drawer-header span
+    {
+        font-size: 15px;
+    }
+
+    .header-info-btn
+    {
+        width: 38px;
+        height: 38px;
+
+        right: 8px;
+    }
+
+    .header-info-btn img
+    {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* =======================================================
+   IPHONE SE / MINI
+======================================================= */
+
+@media (max-width:480px)
+{
+    .protocol-drawer
+    {
+        width: 82vw;
+        right: -82vw;
+    }
+
+    .drawer-content
+    {
+        padding: 12px;
+    }
+
+    .info-card
+    {
+        padding: 12px;
+    }
+}
+
+.notification-empty
+{
+    background: rgba(255,255,255,.04);
+
+    border-left: 4px solid #6B7280;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+/* ── Dark-theme overrides for PCR tool buttons ────────────────────── */
+.pcr-main .ctrl-btn {
+    background: rgba(14,165,233,0.10);
+    border: 1px solid rgba(14,165,233,0.28);
+    color: #94a3b8;
+    box-shadow: none;
+}
+.pcr-main .ctrl-btn:hover  { background: rgba(14,165,233,0.18); }
+.pcr-main .ctrl-btn:active { background: rgba(14,165,233,0.28); transform: none; }
+
+.pcr-main .back-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #94a3b8;
+    box-shadow: none;
+}
+.pcr-main .back-btn:hover  { background: rgba(255,255,255,0.10); color: #f1f5f9; }
+.pcr-main .back-btn:active { transform: none; }
+
+.pcr-main .time-display {
+    background: rgba(56,189,248,0.07);
+    border: 1px solid rgba(56,189,248,0.18);
+    color: #94a3b8;
+    box-shadow: none;
+}
+
+/* Make button icons white on dark background */
+.pcr-main .ctrl-btn img,
+.pcr-main .back-btn img {
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+}

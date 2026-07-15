@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>FPS-PCR ADMIN</title>
+
+    <link rel="stylesheet" href="../PCR_Elements/style.css">
+    <link rel="stylesheet" href="pcr_admin.css">
+</head>
+<body>
+
+    <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+    <main class="pcr-main" id="pcr-main" style="visibility:hidden">
+
+        <div class="pcr-container">
+
+            <div class="pcr-header">
+                <h1>ADMIN</h1>
+                <p>System configuration</p>
+            </div>
+
+            <div class="admin-menu">
+                <div class="admin-card" data-option="wifi_config">
+                    <img src="../../assets/PCR_WIFI_CONFIG.png" alt="Wifi">
+                    <span>WIFI CONFIG</span>
+                </div>
+                <div class="admin-card" data-option="update_protocol">
+                    <img src="../../assets/PCR_UPDATE.png" alt="Update">
+                    <span>UPDATE PROTOCOL</span>
+                </div>
+            </div>
+
+            <div class="bottom-toolbar">
+                <div id="btn-back" class="back-btn">BACK</div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/program/program.js"></script>
+    <script src="../../shared/Data_config.js"></script>
+    <script src="../../shared/Convert.js"></script>
+    <script src="../../shared/Handle.js"></script>
+    <script src="../../components/notification.js"></script>
+    <script src="../../components/Render_Managers.js"></script>
+
+    <script type="module" src="../../shared/PageRouter.js"></script>
+    <script src="pcr_admin.js"></script>
+
+</body>
+</html>

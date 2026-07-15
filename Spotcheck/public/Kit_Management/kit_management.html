@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS32B - Spotcheck 26001</title>
+
+  <link rel="stylesheet" href="../assets/fontawesome-7.1.0/css/all.min.css">
+  <link rel="stylesheet" href="./kit_management.css">
+  <link rel="stylesheet" href="../general_style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="titlebar-top">
+      <span class="titlebar-version">SPOTCHECK</span>
+    </div>
+
+    <div class="titlebar-bottom">
+      <span class="titlebar-page">
+        <i class="fa-solid fa-gear"></i> 
+        <span data-i18n="HEADER_KIT_MANAGEMENT"></span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+    <div class="container">
+
+      <!-- ===== LEFT PANEL ===== -->
+      <div class="left-panel">
+
+        <!-- KIT INFORMATION -->
+        <div class="section">
+          <label class="section-title" data-i18n="LABEL_KIT_INFORMATION"></label>
+
+          <div class="form-group">
+            <label for="kitName" data-i18n="LABEL_KIT_NAME"></label>
+            <input
+              type="text"
+              id="kitName"
+              data-i18n-placeholder="PLACEHOLDER_KIT_NAME"
+            >
+          </div>
+        </div>
+
+        <!-- STANDARD CURVE DATA -->
+        <div class="section">
+          <label class="section-title" data-i18n="LABEL_STANDARD_CURVE"></label>
+
+          <table class="std-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th data-i18n="LABEL_CONCENTRATION"></th>
+                <th data-i18n="LABEL_VALUE"></th>
+              </tr>
+            </thead>
+
+            <tbody id="tableBody">
+              <tr>
+                <td class="row-label">1</td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+              </tr>
+
+              <tr>
+                <td class="row-label">2</td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+              </tr>
+
+              <tr>
+                <td class="row-label">3</td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+              </tr>
+
+              <tr>
+                <td class="row-label">4</td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+              </tr>
+
+              <tr>
+                <td class="row-label">5</td>
+                <td><input type="number"></td>
+                <td><input type="number"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- N-VALUE -->
+        <div class="section">
+          <label class="section-title" data-i18n="LABEL_NVALUE"></label>
+
+          <div class="n-value">
+            <div class="n-value-item">
+              <label for="nLow" data-i18n="LABEL_NHIGH"></label>
+              <input type="number" id="nLow">
+            </div>
+
+            <div class="n-value-item">
+              <label for="nHigh" data-i18n="LABEL_NLOW"></label>
+              <input type="number" id="nHigh">
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="button-bar">
+          <button id="saveBtn" onclick="Save_Clicked()" data-i18n="BUTTON_SAVE"></button>
+          <!-- <button id="deleteBtn" onclick="Delete_Clicked()">Delete</button> -->
+          <button id="clearBtn" onclick="Clear_Clicked()" data-i18n="BUTTON_CLEAR"></button>
+        </div>
+
+      </div>
+
+      <!-- ===== FILE PANEL ===== -->
+      <div class="file-panel">
+
+        <div class="panel-header">
+          <h2 data-i18n="LABEL_AVAILABLE_KITS"></h2>
+        </div>
+
+        <div class="panel-body">
+          <div id="result-grid" class="result-grid">
+            <!-- Items will be created in JavaScript -->
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <!-- <button id="load-btn" class="load-btn">Load</button> -->
+          <button id="delete-btn" class="delete-btn" data-i18n="BUTTON_DELETE"></button>
+          <button id="deleteall-btn" class="deleteall-btn" data-i18n="BUTTON_DELETEALL"></button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <button
+      id="backBtn"
+      type="button"
+      onclick="Back_Clicked()"
+      data-i18n="BUTTON_BACK"
+    >
+      
+    </button>
+    <!-- <button id="nextBtn" type="button" onclick="Next_Clicked()">Next</button> -->
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../Navigation/nav.js"></script>
+  <script src="kit_management.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="../lang/i18n.js"></script>
+
+</body>
+</html>

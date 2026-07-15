@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR</title>
+  <link rel="apple-touch-icon"      sizes="32x32" href="../../assets/ICON.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/ICON.png">
+
+  <link rel="stylesheet" href="../PCR_Elements/style.css">
+  <link rel="stylesheet" href="/PCR/features/PCR_Session_Info/pcr_session_info.css">
+</head>
+<body>
+
+<div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+<main class="pcr-main" id="pcr-main" style="visibility:hidden">
+  <div class="pcr-header">
+    <h1>NEW PROTOCOL</h1>
+    <p>Setup your experiments</p>
+  </div>
+
+  <div class="protocol-input-wrapper">
+    <input type="text" id="protocolName" placeholder="Enter protocol name..." class="pcr-input">
+  </div>
+
+  <div class="button-row">
+    <button id="backBtn" class="pcr-btn back-btn">BACK</button>
+    <button id="nextBtn" class="pcr-btn next-btn">NEXT</button>
+  </div>
+</main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../../components/header/header.js"></script> 
+
+  <script type="module" src="../../core/socket_client.js"></script>
+  <script src="../../shared/Handle.js"></script>
+
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script type="module" src="../PCR_Session_Info/pcr_session_info.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS32B - Spotcheck 26001</title>
+
+  <!-- ================= STYLES ================= -->
+  <link rel="stylesheet" href="../assets/fontawesome-7.1.0/css/all.min.css">
+  <link rel="stylesheet" href="./session_info.css">
+  <link rel="stylesheet" href="../general_style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="titlebar-top">
+      <span class="titlebar-version">SPOTCHECK</span>
+    </div>
+
+    <div class="titlebar-bottom">
+      <span class="titlebar-page">
+        <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <span data-i18n="HEADER_SESSION_INFORMATION"></span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+    <div class="form-container">
+
+      <!-- session name -->
+      <div class="form-group">
+        <label for="filename" data-i18n="LABEL_SESSION_NAME"></label>
+        <input
+          type="text"
+          id="filename"
+          data-i18n-placeholder="PLACEHOLDER_SESSION_NAME"
+        >
+      </div>
+
+      <!-- technician -->
+      <div class="form-group">
+        <label for="technician" data-i18n="LABEL_TECHNICIAN_NAME"></label>
+        <input
+          type="text"
+          id="technician"
+          data-i18n-placeholder="PLACEHOLDER_TECHNICIAN_NAME"
+        >
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="LABEL_PCR_DATA"></label>
+        <button type="button" id="btnOpenPCRModal" class="btn-secondary">
+          <i class="fa-solid fa-folder-open"></i> <span data-i18n="PCR_DATA_BUTTON"></span>
+        </button>
+        
+        <div id="selection-status" style="margin-top: 5px; display: flex; align-items: center; gap: 10px;">
+          <span id="selected-pcr-path" style="font-size: 0.8rem; color: #aaa;" data-i18n="PCR_FOLDER_NOSELECT"></span>
+          <button type="button" id="btnClearSelection" style="display: none; border: none; background: transparent; color: #ff4d4d; cursor: pointer;">
+            <i class="fa-solid fa-times-circle"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="pcrModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <button id="btnBackModal" class="btn-back-modal" style="display: none;">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <h3 style="margin: 0;" data-i18n="PCR_DATA_BUTTON"></h3>
+            </div>
+            <button id="btnCancelModal" class="btn-close-modal">X</button>
+          </div>
+          
+          <div id="result-grid" class="result-grid"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <button id="btnBack" type="button" data-i18n="BUTTON_BACK"></button>
+    <button id="btnNext" type="button" data-i18n="BUTTON_NEXT"></button>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../Navigation/nav.js"></script>
+  <script src="session_info.js"></script>
+  <script src="../lang/i18n.js"></script>
+
+</body>
+</html>

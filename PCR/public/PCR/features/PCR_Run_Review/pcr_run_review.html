@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR - Analysis</title>
+
+  <link rel="apple-touch-icon" sizes="32x32" href="../../assets/ICON.png">
+  <link rel="icon" type="image/png"          sizes="32x32" href="../../assets/ICON.png">
+
+  <link rel="stylesheet" href="pcr_run_review.css">
+
+  <!-- amCharts5 -->
+  <script src="../../../libs/amcharts5/index.js"></script>
+  <script src="../../../libs/amcharts5/xy.js"></script>
+  <script src="../../../libs/amcharts5/themes/Animated.js"></script>
+</head>
+
+<body>
+
+  <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+
+  <!-- ===================== VIEW: IMPORT ===================== -->
+  <div id="view-import" class="view active">
+
+    <div class="rr-card import-card">
+
+      <div class="import-header">
+        <div class="import-icon">&#128193;</div>
+        <h2>Analysis</h2>
+        <p>Import file</p>
+      </div>
+
+      <!-- Drop zone -->
+      <div class="drop-zone" id="drop-zone">
+        <div class="dz-icon">&#128196;</div>
+        <div class="dz-title">Drag &amp; Drop file here</div>
+        <div class="dz-sub">or click the button below</div>
+        <input type="file" id="file-input" accept=".json">
+        <button class="btn-select" id="btn-select-file">Choose File</button>
+        <div class="selected-name" id="selected-name">No file selected</div>
+      </div>
+
+      <!-- Actions -->
+      <div class="import-actions">
+        <button class="rr-btn btn-back"  id="btn-back">Back</button>
+        <button class="rr-btn btn-apply" id="btn-apply" disabled>Apply</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== VIEW: ANALYZING ===================== -->
+  <div id="view-analyzing" class="view">
+    <div class="rr-card analyzing-card">
+      <div class="spinner"></div>
+      <div class="analyzing-text">Analyzing...</div>
+    </div>
+  </div>
+
+  <!-- ===================== VIEW: RESULT ===================== -->
+  <div id="view-result" class="view">
+
+    <div class="result-layout">
+
+      <!-- Toolbar top -->
+      <div class="result-toolbar">
+        <button class="rr-btn btn-back-sm" id="btn-back-result">Back</button>
+        <div class="result-title" id="result-protocol-name">Protocol</div>
+      </div>
+
+      <!-- Scrollable body below toolbar -->
+      <div class="result-scroll">
+
+        <!-- Top section: Info + Notifications -->
+        <div class="result-top">
+          <div class="result-panel" id="info-panel"></div>
+          <div class="result-panel" id="notif-panel"></div>
+        </div>
+
+        <!-- Stages -->
+        <div class="result-panel stages-panel" id="stages-panel"></div>
+
+        <!-- Chart -->
+        <div class="result-panel chart-panel">
+          <div class="chart-panel-header">
+            <div class="panel-title">&#128202; Temperature Chart</div>
+            <div class="series-toggle">
+              <button class="stg-btn active" data-mode="both">Both</button>
+              <button class="stg-btn" data-mode="measured">Sample</button>
+              <button class="stg-btn" data-mode="target">Target</button>
+            </div>
+          </div>
+          <div id="rr-chart"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../../core/api.js"         type="module"></script>
+  <script src="../../core/socket_client.js" type="module"></script>
+  <script src="../../components/notification.js"></script>
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script src="../../components/header/header.js"></script>
+  <script src="pcr_run_review.js"></script>
+
+</body>
+</html>

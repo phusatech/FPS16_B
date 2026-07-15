@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR - Run History</title>
+  <link rel="stylesheet" href="../PCR_Elements/style.css">
+  <link rel="stylesheet" href="pcr_history.css">
+
+</head>
+<body>
+
+  <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+  <main class="pcr-main" id="pcr-main" style="visibility:hidden">
+    <div class="pcr-container history-layout">
+      
+      <div class="history-panel history-left">
+        <div class="panel-header history-header">
+            <h3>
+                <i class="fa-solid fa-folder-open"></i>
+                History
+            </h3>
+
+            <div class="history-search-box">
+                <input
+                    type="text"
+                    id="history-filter"
+                    placeholder="Search..."
+                >
+                <button id="clear-filter-btn">✕</button>
+            </div>
+        </div>
+
+        <div id="pcr-history-list-preview"
+            class="history-list-preview-container">
+        </div>
+      </div>
+
+      <div class="history-panel history-right">
+        <div class="panel-header">
+          <h3><i class="fa-solid fa-file-lines"></i>Preview</h3>
+        </div>
+
+        <div id="history-detail-preview" class="detail-preview-container">
+          <p class="empty-message">Please select a log file from the history list to preview.</p>
+        </div>
+
+        <div id="control-panel-history" class="tool-container">
+          <button id="back-btn" class="btn-history btn-back">
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Back</span>
+          </button>
+
+          <button id="download-btn" class="btn-history btn-download" disabled>
+              <i class="fa-solid fa-download"></i>
+              <span>Download</span>
+          </button>
+
+          <button id="view_detail-btn" class="btn-history btn-view_detail" disabled>
+              <i class="fa-solid fa-play"></i>
+              <span>View</span>
+          </button>
+
+          <button id="run-btn" class="btn-history btn-run" disabled>
+              <i class="fa-solid fa-play"></i>
+              <span>Run</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../../components/header/header.js"></script> 
+  <script src="../../components/program/program.js"></script> 
+
+  <script src="../../shared/Data_config.js"></script>
+  <script src="../../shared/Convert.js"></script>
+  <script src="../../shared/Handle.js"></script>
+
+  <script src="../../components/notification.js"></script>
+  <script src="../../components/Render_Managers.js"></script>
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script type="module" src="../PCR_History/pcr_history.js"></script>
+  
+
+</body> 
+</html>

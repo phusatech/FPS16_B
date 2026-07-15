@@ -1,0 +1,40 @@
+{
+  "sensitivity": null,
+  "kit_value_a": null,
+  "kit_value_b": null,
+  "kit_selected": null,
+  "session_info": [
+    "",
+    "",
+    ""
+  ],
+  "samplefile_create_direct": 0,
+  "session_createtime": "",
+  "samplename_list": [
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A",
+    "N/A"
+  ],
+  "email": "",
+  "appPass": "",
+  "automail": 0,
+  "recipient": "",
+  "resultfile_name": null,
+  "lasttime_check": "1111-11-11 11:11:11",
+  "samplefile_name": "ehp wssv 15",
+  "famfolder_name": "Optical (2026-07-14_08-28-28)",
+  "pcr_data_path": ""
+}
