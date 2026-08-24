@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCR Run Report - 2026.08.15_Run1_1</title>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --color-target: #2563eb;
+            --color-measured: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-variant-numeric: tabular-nums;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        /* Header Navigation Bar */
+        .top-navbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 16px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-subtitle-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .protocol-main-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .col-12 {
+            grid-column: span 12;
+        }
+
+        .col-6 {
+            grid-column: span 6;
+        }
+
+        .col-4 {
+            grid-column: span 4;
+        }
+
+        @media (max-width: 768px) {
+
+            .col-6,
+            .col-4 {
+                grid-column: span 12;
+            }
+
+            .protocol-main-title {
+                font-size: 22px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        /* Card Element */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            padding: 16px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-item {
+            padding: 10px 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .info-item .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .info-item .info-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 2px;
+            word-break: break-word;
+        }
+
+        /* Notifications list */
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .notification-item.error {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        .notification-item.warning {
+            background-color: #fffbeb;
+            border-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .notification-item.info {
+            background-color: #f0f9ff;
+            border-color: #bae6fd;
+            color: #075985;
+        }
+
+        .notif-time {
+            font-size: 11px;
+            font-weight: 700;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        .empty-notif {
+            text-align: center;
+            padding: 18px;
+            color: var(--text-muted);
+            font-size: 13px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* Sequence Visualizer Styles */
+        .protocol-sequence-wrapper {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-top: 6px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .protocol-sequence-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .protocol-sequence-wrapper::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .protocol-sequence-wrapper::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .protocol-sequence-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .seq-block {
+            flex: 0 0 130px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .seq-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Hold Start - Red Accent */
+        .seq-hold-start {
+            background: #fffcf5;
+            border: 1px solid #fee2e2;
+            border-left: 4px solid #ff0000;
+        }
+
+        .seq-hold-start .seq-tag {
+            color: #ff0000;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .seq-hold-start .seq-temp {
+            color: #0f172a;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .seq-hold-start .seq-time {
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Hold End - Cyan Blue Accent */
+        .seq-hold-end {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #00aeff;
+        }
+
+        .seq-hold-end .seq-tag {
+            color: #00aeff;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .seq-hold-end .seq-temp {
+            color: #0f172a;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .seq-hold-end .seq-time {
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* PCR Loop Group Container - Accent Teal */
+        .seq-pcr-loop-group {
+            flex: 0 0 auto;
+            min-width: 250px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #00b18a;
+            border-radius: 12px;
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .seq-pcr-loop-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .loop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .loop-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #00b18a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .loop-steps {
+            display: flex;
+            gap: 8px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .seq-pcr-step {
+            flex: 0 0 105px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.2s ease;
+        }
+
+        .seq-pcr-step:hover {
+            border-color: #94a3b8;
+        }
+
+        .step-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .step-temp {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 2px 0;
+        }
+
+        .step-detail {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        /* 100% Unified Zero-CDN Hardware-Accelerated Chart Engine */
+        .chart-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chart-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .series-toggle-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+
+        .series-toggle-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .chart-container-wrapper {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            min-height: 280px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            /* touch-action: none lets JS fully control all touch gestures inside the chart */
+            touch-action: none;
+        }
+
+        /* Floating Glassmorphism Crosshair Tooltip Card */
+        .chart-tooltip-box {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(15, 23, 42, 0.92);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.15s ease, transform 0.1s ease;
+            white-space: nowrap;
+        }
+
+        .chart-tooltip-box.active {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tooltip-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 3px;
+        }
+
+        .tooltip-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container-wrapper {
+                height: 280px;
+                min-height: 240px;
+            }
+        }
+
+        /* Modal Overlay for JSON import */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            width: 92%;
+            max-width: 550px;
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        textarea.json-input {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            resize: vertical;
+            background: #f8fafc;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 14px;
+        }
+    </style>
+
+    <script id="injected-pcr-data">
+        window._INJECTED_PCR_DATA = null;
+    </script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="top-navbar">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-title-group">
+                    <div class="header-subtitle-tag">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <path d="M12 18v-6" />
+                            <path d="m9 15 3 3 3-3" />
+                        </svg>
+                        PCR RUN REPORT
+                    </div>
+                    <h1 class="protocol-main-title">
+                        <span id="protocolTitle">2026.08.12_Run2</span>
+                    </h1>
+                </div>
+                <div class="header-actions"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+        <div class="dashboard-grid">
+
+            <!-- 1. Run Information Section -->
+            <section class="card col-6">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        Run Information
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Protocol Name</div>
+                        <div class="info-value" id="infoProtocolName">2026.08.12_Run2</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Date Run</div>
+                        <div class="info-value" id="infoDateRun">12/08/2026</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Start Time</div>
+                        <div class="info-value" id="infoTimeStart">10:47:15</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Stop Time</div>
+                        <div class="info-value" id="infoTimeStop">10:47:35</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Total Duration</div>
+                        <div class="info-value" id="infoTotalTime">00:00:20</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Time Estimate</div>
+                        <div class="info-value" id="infoTotalEstimate">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Protocol Parameters Section -->
+            <section class="card col-6">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        Protocol Parameters
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Lid Temperature</div>
+                        <div class="info-value" id="paramLid">100 °C</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Sample Volume</div>
+                        <div class="info-value" id="paramVolume">30 µL</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Protocol Sequence Visualizer -->
+            <section class="card col-12">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
+                        Protocol Sequence
+                    </div>
+                </div>
+                <div class="protocol-sequence-wrapper" id="protocolBlocksContainer">
+                    <div class="seq-block seq-hold-start">
+                        <div class="seq-tag">Hold Start</div>
+                        <div class="seq-temp">93°C</div>
+                        <div class="seq-time">10:00</div>
+                    </div>
+                    <div class="seq-pcr-loop-group">
+                        <div class="loop-header">
+                            <span class="loop-title">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10" />
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                                </svg>
+                                PCR Loop (43 Cycles)
+                            </span>
+                        </div>
+                        <div class="loop-steps">
+                            <div class="seq-pcr-step">
+                                <div class="step-num">Step 1</div>
+                                <div class="step-temp">93°C</div>
+                                <div class="step-detail">00:15</div>
+                            </div>
+                            <div class="seq-pcr-step">
+                                <div class="step-num">Step 2</div>
+                                <div class="step-temp">66°C</div>
+                                <div class="step-detail">00:30</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seq-block seq-hold-end">
+                        <div class="seq-tag">Hold End</div>
+                        <div class="seq-temp">25°C</div>
+                        <div class="seq-time">Hold</div>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- 3. Notifications Section -->
+            <section class="card col-12">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        Notifications
+                    </div>
+                    <span class="badge" style="background:#f1f5f9; color:#475569;" id="notifCountBadge">0
+                        Notifications</span>
+                </div>
+
+                <div class="notification-list" id="notificationContainer">
+                    <div class="empty-notif">
+                        ✅ No notifications or system errors recorded for this run.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 100% Unified Zero-CDN 60FPS Cross-Platform Script -->
+    <script>
+        const DEFAULT_PCR_DATA = {
+            "PROTOCOL_NAME": "2026.08.12_Run2",
+            "Date_Saved": "",
+            "Time_Saved": "",
+            "Date_Run": "12/08/2026",
+            "Time_Run_Start": "10:47:15",
+            "Time_Run_Stop": "10:47:35",
+            "Time_Run_Total": "00:00:20",
+            "Block": [
+                93, 93, 66, 25, 25, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49
+            ],
+            "Time": [
+                600, 15, 30, 30, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39
+            ],
+            "Lid": 100,
+            "Liquid": 30,
+            "Hold_Start": 1,
+            "PCR_Loop": 1,
+            "Hold_End": 1,
+            "Step_PCR": [
+                2, 3, 2, 2
+            ],
+            "Cycles_PCR": [
+                43, 2, 17, 18
+            ],
+            "Notifications": [],
+            "Target_Temperature_Array": [
+                93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93, 93.0, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 66, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25
+            ],
+            "Measured_Temperature_Array": [
+                30.0, 48.5, 67.0, 82.0, 91.5, 92.8, 93.1, 93.0, 92.9, 93.0, 93.1, 92.9, 93.0, 93.1, 93.0, 92.8, 93.0, 93.1, 92.9, 93.0, 93.1, 92.9, 93.0, 93.0, 85.0, 74.0, 68.0, 66.2, 65.9, 66.1, 66.0, 65.9, 66.1, 66.0, 66.1, 66.0, 52.0, 38.0, 28.5, 25.3, 24.9, 25.1, 25.0, 24.9, 25.0, 25.0
+            ]
+        };
+
+        let currentPcrData = JSON.parse(JSON.stringify(DEFAULT_PCR_DATA));
+        let zoomLevel = 1.0;
+        let targetZoomLevel = 1.0;
+        let panOffset = 0;
+        let activeHoverIdx = -1;
+        let chartEngine = null;
+        let _listenersOK = false;
+
+        function applyInjectedPcrData() {
+            if (window._INJECTED_PCR_DATA && typeof window._INJECTED_PCR_DATA === 'object') {
+                currentPcrData = JSON.parse(JSON.stringify(window._INJECTED_PCR_DATA));
+                window.currentPcrData = currentPcrData;
+            }
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Data parser / sanitizer
+        // ─────────────────────────────────────────────────────────────────────
+        function getParsedTemperatureData(data) {
+            const target = (data.Target_Temperature_Array || []).slice();
+            const measured = (data.Measured_Temperature_Array || []).slice();
+            if (target.length > 0 && measured.length > 0) return { target, measured };
+
+            // Fallback: synthesize from Block / Time arrays
+            const blocks = data.Block || [];
+            const t = [], m = [];
+            let cur = 30;
+            blocks.forEach((temp) => {
+                for (let k = 0; k < 12; k++) {
+                    t.push(temp);
+                    cur += (temp - cur) * 0.38;
+                    m.push(parseFloat((cur + Math.sin(k * 1.2) * 0.12).toFixed(1)));
+                }
+            });
+            return { target: t, measured: m };
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Pure SVG Responsive Thermal Chart Engine (Zero-CDN, Instant iOS file://)
+        // ─────────────────────────────────────────────────────────────────────
+        const DEBUG_CHART_GESTURE = false;
+
+        function logGesture(...args) {
+            if (DEBUG_CHART_GESTURE) {
+                console.log('[PCR Chart]', ...args);
+            }
+        }
+
+
+        function formatMinSec(totalSeconds) {
+            if (isNaN(totalSeconds) || totalSeconds < 0) totalSeconds = 0;
+            const m = Math.floor(totalSeconds / 60);
+            const s = totalSeconds % 60;
+            const mm = m < 10 ? '0' + m : m;
+            const sInt = Math.floor(s);
+            const ss = sInt < 10 ? '0' + sInt : sInt;
+            const frac = s - sInt;
+            if (frac > 0.05) {
+                return `${mm}:${s.toFixed(1).padStart(4, '0')}`;
+            }
+            return `${mm}:${ss}`;
+        }
+
+        function startApp() {
+            applyInjectedPcrData();
+
+            // 2. Render Dashboard cards independently
+            try {
+                renderDashboard(currentPcrData);
+            } catch (e) {
+                console.error("Dashboard render error: ", e);
+            }
+        }
+
+        if (document.readyState !== 'loading') {
+            startApp();
+        } else {
+            document.addEventListener('DOMContentLoaded', startApp);
+        }
+
+        window.addEventListener('load', startApp);
+        window.addEventListener('resize', () => { if (chartEngine) chartEngine.render(); });
+
+        // iOS Safari / Files preview lifecycle triggers
+        setTimeout(startApp, 10);
+        setTimeout(startApp, 100);
+        setTimeout(startApp, 300);
+        setTimeout(startApp, 800);
+
+        // Main Dashboard Renderer
+        function renderDashboard(data) {
+            const titleElem = document.getElementById('protocolTitle');
+            if (titleElem) titleElem.textContent = data.PROTOCOL_NAME || 'PCR_Run';
+
+            const infoName = document.getElementById('infoProtocolName');
+            if (infoName) infoName.textContent = data.PROTOCOL_NAME || '-';
+
+            const infoDate = document.getElementById('infoDateRun');
+            if (infoDate) infoDate.textContent = data.Date_Run || '-';
+
+            const infoStart = document.getElementById('infoTimeStart');
+            if (infoStart) infoStart.textContent = data.Time_Run_Start || '-';
+
+            const infoStop = document.getElementById('infoTimeStop');
+            if (infoStop) infoStop.textContent = data.Time_Run_Stop || '-';
+
+            const infoTotal = document.getElementById('infoTotalTime');
+            if (infoTotal) infoTotal.textContent = data.Time_Run_Total || '-';
+
+            const infoEstimate = document.getElementById('infoTotalEstimate');
+            if (infoEstimate) infoEstimate.textContent = data.Time_Estimate || '-';
+
+            const lidElem = document.getElementById('paramLid');
+            if (lidElem) lidElem.textContent = (data.Lid !== undefined ? data.Lid : 100) + ' °C';
+
+            const volElem = document.getElementById('paramVolume');
+            if (volElem) volElem.textContent = (data.Liquid !== undefined ? data.Liquid : 30) + ' µL';
+
+            renderNotifications(data.Notifications || []);
+            renderProtocolBlocks(data);
+        }
+
+        function renderNotifications(notifications) {
+            const container = document.getElementById('notificationContainer');
+            const notifCountBadge = document.getElementById('notifCountBadge');
+
+            if (!container) return;
+
+            if (!Array.isArray(notifications)) {
+                notifications = [];
+            }
+
+            if (notifCountBadge) {
+                notifCountBadge.textContent =
+                    `${notifications.length} Notification${notifications.length === 1 ? '' : 's'}`;
+            }
+
+            container.innerHTML = '';
+
+            if (notifications.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-notif">
+                        ✅ No notifications or system errors recorded for this run.
+                    </div>
+                `;
+                return;
+            }
+
+            notifications.forEach(notif => {
+                const div = document.createElement('div');
+
+                const errorCode = notif.Error_Code || 'NOTIFICATION';
+                const message = notif.Message || 'No message';
+                const acknowledged = notif.Acknowledged === true;
+
+                div.className = `notification-item error`;
+
+                div.innerHTML = `
+                    <div style="flex:1;">
+                        <div style="
+                            font-weight:800;
+                            margin-bottom:4px;
+                        ">
+                            ⚠️ ${errorCode}
+                        </div>
+
+                        <div class="notif-msg">
+                            ${message.replace(/\n/g, '<br>')}
+                        </div>
+
+                        <div style="
+                            margin-top:6px;
+                            font-size:11px;
+                            font-weight:700;
+                        ">
+                            ${acknowledged
+                                ? '✓ Acknowledged'
+                                : '⚠ Not acknowledged'}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(div);
+            });
+        }
+
+        function renderProtocolBlocks(data) {
+            const container = document.getElementById('protocolBlocksContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const holdStartCount = data.Hold_Start !== undefined ? data.Hold_Start : 1;
+            const holdEndCount = data.Hold_End !== undefined ? data.Hold_End : 1;
+            const pcrLoopCount = data.PCR_Loop !== undefined ? data.PCR_Loop : 1;
+            const stepPcr = data.Step_PCR || [2];
+            const cyclesPcr = data.Cycles_PCR || [43];
+            const blocks = data.Block || [];
+            const times = data.Time || [];
+
+            let blockIdx = 0;
+
+            for (let i = 0; i < holdStartCount; i++) {
+                if (blockIdx < blocks.length) {
+                    const timeVal = times[blockIdx];
+                    const timeStr = (timeVal !== undefined && timeVal !== null && !isNaN(timeVal)) ? formatMinSec(timeVal) : 'Hold';
+                    const holdStartDiv = document.createElement('div');
+                    holdStartDiv.className = 'seq-block seq-hold-start';
+                    holdStartDiv.innerHTML = `
+                        <div class="seq-tag">Hold Start ${holdStartCount > 1 ? (i + 1) : ''}</div>
+                        <div class="seq-temp">${blocks[blockIdx]}°C</div>
+                        <div class="seq-time">${timeStr}</div>
+                    `;
+                    container.appendChild(holdStartDiv);
+                    blockIdx++;
+                }
+            }
+
+            const activeLoopLimit = Math.min(pcrLoopCount, stepPcr.length);
+
+            for (let stageIdx = 0; stageIdx < activeLoopLimit; stageIdx++) {
+                const stepCount = stepPcr[stageIdx] !== undefined ? stepPcr[stageIdx] : 2;
+                const cycles = cyclesPcr[stageIdx] !== undefined ? cyclesPcr[stageIdx] : 1;
+
+                const stageContainer = document.createElement('div');
+                stageContainer.className = 'seq-pcr-loop-group';
+
+                let stageHtml = `
+                    <div class="loop-header">
+                        <span class="loop-title">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                            PCR Loop ${activeLoopLimit > 1 ? (stageIdx + 1) : ''} (${cycles} Cycles)
+                        </span>
+                    </div>
+                    <div class="loop-steps">
+                `;
+
+                for (let s = 0; s < stepCount; s++) {
+                    const temp = blockIdx < blocks.length ? blocks[blockIdx] : '--';
+                    const timeSec = blockIdx < times.length ? times[blockIdx] : '--';
+                    const timeStr = (typeof timeSec === 'number' && !isNaN(timeSec)) ? formatMinSec(timeSec) : (timeSec !== '--' ? formatMinSec(parseFloat(timeSec)) : '--');
+
+                    stageHtml += `
+                        <div class="seq-pcr-step">
+                            <div class="step-num">Step ${s + 1}</div>
+                            <div class="step-temp">${temp}°C</div>
+                            <div class="step-detail">${timeStr}</div>
+                        </div>
+                    `;
+                    blockIdx++;
+                }
+
+                stageHtml += `</div>`;
+                stageContainer.innerHTML = stageHtml;
+                container.appendChild(stageContainer);
+            }
+
+            for (let i = 0; i < holdEndCount; i++) {
+                const temp = blockIdx < blocks.length ? blocks[blockIdx] : (blocks.length > 0 ? blocks[blocks.length - 1] : 25);
+                const timeVal = blockIdx < times.length ? times[blockIdx] : null;
+                const timeStr = (timeVal !== null && timeVal !== undefined && !isNaN(timeVal)) ? formatMinSec(timeVal) : 'Hold';
+
+                const holdEndDiv = document.createElement('div');
+                holdEndDiv.className = 'seq-block seq-hold-end';
+                holdEndDiv.innerHTML = `
+                    <div class="seq-tag">Hold End ${holdEndCount > 1 ? (i + 1) : ''}</div>
+                    <div class="seq-temp">${temp}°C</div>
+                    <div class="seq-time">${timeStr}</div>
+                `;
+                container.appendChild(holdEndDiv);
+                blockIdx++;
+            }
+        }
+
+       
+    </script>
+</body>
+
+</html>

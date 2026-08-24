@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR - Calibration</title>
+  <link rel="apple-touch-icon" sizes="32x32" href="../../assets/ICON.png">
+  <link rel="icon" type="image/png"          sizes="32x32" href="../../assets/ICON.png">
+  <link rel="stylesheet" href="pcr_calib.css">
+</head>
+<body>
+
+  <!-- ═══ LOADING OVERLAY ═══ -->
+  <div class="calib-loading" id="calib-loading">
+    <div class="calib-loading-inner">
+      <div class="cb-spinner"></div>
+      <div class="cb-loading-text">Loading calibration data...</div>
+    </div>
+  </div>
+
+  <!-- ═══ TOP BAR ═══ -->
+  <div class="calib-topbar">
+    <button class="cb-btn-back" id="btn-back">Back</button>
+    <div class="calib-topbar-title">Calibration</div>
+    <div class="topbar-spacer"></div>
+  </div>
+
+  <!-- ═══ SCROLL BODY ═══ -->
+  <div class="calib-scroll">
+  <div class="calib-content">
+
+    <!-- Status banner -->
+    <div class="calib-status" id="calib-status" style="display:none"></div>
+
+    <!-- ── Device Info ── -->
+    <div class="param-section section-device">
+      <div class="section-title">Device Information</div>
+      <div class="device-fields">
+        <div class="param-row">
+          <label class="param-label">Host Name</label>
+          <input class="param-input" type="text" id="dev-host_name" placeholder="e.g. FPS32B" autocomplete="off">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Serial Number</label>
+          <input class="param-input" type="text" id="dev-seri_number" placeholder="e.g. 26001" autocomplete="off">
+        </div>
+        <div class="device-save-col">
+          <label class="param-label">&nbsp;</label>
+          <button class="cb-btn-save-device" id="btn-save-device">Save</button>
+        </div>
+      </div>
+      <div class="role-row">
+        <span class="role-label">Access Role</span>
+        <div class="role-btns">
+          <button class="role-btn" id="role-staff" data-role="staff">Staff</button>
+          <button class="role-btn" id="role-customer" data-role="customer">Customer</button>
+        </div>
+      </div>
+      <div class="role-row">
+        <span class="role-label">Active Servers</span>
+        <div class="server-btns">
+          <button class="server-btn" id="srv-PCR"       data-srv="PCR">PCR</button>
+          <button class="server-btn" id="srv-VE100"     data-srv="VE100">VE100</button>
+          <button class="server-btn" id="srv-SPOTCHECK" data-srv="SPOTCHECK">SPOTCHECK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── System Configuration ── -->
+    <div class="param-section section-syscfg">
+      <div class="section-title">System Configuration</div>
+      <div class="syscfg-list">
+
+        <!-- Device Type -->
+        <div class="syscfg-item syscfg-device-row">
+          <span class="syscfg-label">Device Type</span>
+          <div class="dev-type-group" id="dev-type-group">
+            <button class="dev-type-btn" data-val="16">P16</button>
+            <button class="dev-type-btn" data-val="32">P32</button>
+            <button class="dev-type-btn" data-val="48">P48</button>
+            <button class="dev-type-btn" data-val="96">P96</button>
+          </div>
+        </div>
+
+        <!-- Debug LOG -->
+        <div class="syscfg-item">
+          <span class="syscfg-label">Debug LOG</span>
+          <div class="sys-toggle-row">
+            <label class="sys-toggle">
+              <input type="checkbox" id="sys-debug-log">
+              <span class="sys-toggle-track"><span class="sys-toggle-thumb"></span></span>
+            </label>
+            <span class="sys-toggle-val" id="sys-debug-log-val">OFF</span>
+          </div>
+        </div>
+
+        <!-- Simulate -->
+        <div class="syscfg-item">
+          <span class="syscfg-label">Simulate</span>
+          <div class="sys-toggle-row">
+            <label class="sys-toggle">
+              <input type="checkbox" id="sys-simulate">
+              <span class="sys-toggle-track"><span class="sys-toggle-thumb"></span></span>
+            </label>
+            <span class="sys-toggle-val" id="sys-simulate-val">OFF</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Threshold ── -->
+    <div class="param-section">
+      <div class="section-title">Threshold</div>
+      <div class="param-grid-2">
+        <div class="param-row">
+          <label class="param-label">HeatSink Threshold <span class="param-unit">°C</span></label>
+          <input class="param-input" type="number" step="0.1" id="HeatSink_Threshold" placeholder="45.0">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Block Threshold <span class="param-unit">°C</span></label>
+          <input class="param-input" type="number" step="0.1" id="Block_Threshold" placeholder="95.0">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Fan ── -->
+    <div class="param-section">
+      <div class="section-title">Fan</div>
+      <div class="param-grid-4">
+        <div class="param-row">
+          <label class="param-label">Speed Hi <span class="param-unit">0-100%</span></label>
+          <input class="param-input" type="number" step="1" id="Fan_Speed_Hi_Threshold" placeholder="100">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Speed Med <span class="param-unit">0-100%</span></label>
+          <input class="param-input" type="number" step="1" id="Fan_Speed_Med_Threshold" placeholder="70">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Speed Lo <span class="param-unit">0-100%</span></label>
+          <input class="param-input" type="number" step="1" id="Fan_Speed_Lo_Threshold" placeholder="40">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Cool Down Time <span class="param-unit">0-255s</span></label>
+          <input class="param-input" type="number" step="1" id="Fan_Cool_Down_Time" placeholder="30">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Speed ── -->
+    <div class="param-section section-speed">
+      <div class="section-title">Speed</div>
+      <div class="param-grid-2">
+        <div class="param-row">
+          <label class="param-label">Heating Speed <span class="param-unit">°C/s</span></label>
+          <input class="param-input" type="number" step="0.1" id="Heating_Speed" placeholder="3.5">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Cooling Speed <span class="param-unit">°C/s</span></label>
+          <input class="param-input" type="number" step="0.1" id="Cooling_Speed" placeholder="3.5">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Temp Hi Measure ── -->
+    <div class="param-section section-temp">
+      <div class="section-title">Temp Hi Measure</div>
+      <div class="sensor-grid" id="grid-temp-hi"></div>
+    </div>
+
+    <!-- ── Temp Lo Measure ── -->
+    <div class="param-section section-temp">
+      <div class="section-title">Temp Lo Measure</div>
+      <div class="sensor-grid" id="grid-temp-lo"></div>
+    </div>
+
+    <!-- ── Control Values ── -->
+    <div class="param-section">
+      <div class="section-title">Control Values</div>
+      <div class="param-grid-4">
+        <div class="param-row">
+          <label class="param-label">Heating Val</label>
+          <input class="param-input" type="number" step="0.1" id="Heating_Val" placeholder="100.0">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Cooling Val</label>
+          <input class="param-input" type="number" step="0.1" id="Cooling_Val" placeholder="0.0">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Factor Normal</label>
+          <input class="param-input" type="number" step="0.1" id="Hold_Time_Adjust_Factor_Normal" placeholder="1.0">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Factor First</label>
+          <input class="param-input" type="number" step="0.1" id="Hold_Time_Adjust_Factor_First" placeholder="1.0">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Limits & Timeout ── -->
+    <div class="param-section">
+      <div class="section-title">Limits &amp; Timeout</div>
+      <div class="param-grid-3">
+        <div class="param-row">
+          <label class="param-label">Lid Max Val <span class="param-unit">0-100%</span></label>
+          <input class="param-input" type="number" step="1" id="Lid_Control_Max_Val" placeholder="100">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Block Max Val <span class="param-unit">0-100%</span></label>
+          <input class="param-input" type="number" step="1" id="Block_Control_Max_Val" placeholder="100">
+        </div>
+        <div class="param-row">
+          <label class="param-label">Ctrl Timeout <span class="param-unit">0-255s</span></label>
+          <input class="param-input" type="number" step="1" id="Control_Timeout" placeholder="30">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Apply ── -->
+    <div class="calib-footer">
+      <button class="cb-btn-apply" id="btn-apply">Apply Calibration</button>
+    </div>
+
+  </div><!-- end calib-content -->
+  </div><!-- end calib-scroll -->
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../../core/socket_client.js" type="module"></script>
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script src="pcr_calib.js"></script>
+</body>
+</html>

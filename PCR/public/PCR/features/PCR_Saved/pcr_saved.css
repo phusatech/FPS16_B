@@ -1,0 +1,259 @@
+/* ==========================================================================
+   1. BASE MOBILE & RESPONSIVE SETUP
+   ========================================================================== */
+body {
+    margin: 0; padding: 0;
+    background-color: #090d16;
+    color: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-container {
+    width: 100%;
+    max-width: 100%; /* Thay vì 800px, để 100% để luôn tràn ngang */
+    margin: 0 auto;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. TOOLBAR
+   ========================================================================== */
+.saved-toolbar {
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+}
+
+.saved-back-btn {
+    padding: 7px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.07);
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.saved-back-btn:hover { background: rgba(255,255,255,0.14); color: #f8fafc; }
+.saved-back-btn:active { transform: scale(0.97); }
+
+/* ==========================================================================
+   3. SEARCH & FILTER CONTROL CENTER
+   ========================================================================== */
+.search-wrapper { 
+    padding: 12px 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
+    background-color: #090d16; 
+}
+
+.search-field { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.field-icon { 
+    position: absolute; 
+    left: 14px; 
+    color: #475569; 
+    pointer-events: none; 
+}
+
+.search-field input {
+    width: 100%; 
+    background-color: #111725; 
+    border: 1px solid #1e293b;
+    border-radius: 12px; 
+    padding: 14px 12px 14px 20px; 
+    color: #ffffff; 
+    font-size: 1rem; 
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-field input:focus { border-color: #3b82f6; }
+
+/* Date Filter Select - Đã tối ưu cho di động */
+#date-filter-select {
+    width: 100%; 
+    padding: 14px 16px; 
+    background: #111725; 
+    color: #ffffff;
+    border: 1px solid #1e293b; 
+    border-radius: 12px; 
+    font-size: 1rem; 
+    font-weight: 500;
+    appearance: none; 
+    -webkit-appearance: none; 
+    cursor: pointer;
+    /* Icon mũi tên */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 10px auto;
+}
+
+#date-filter-select:focus { border-color: #3b82f6; outline: none; }
+
+/* ==========================================================================
+   4. REGISTRY STACK LAYOUT (RESPONSIVE GRID)
+   ========================================================================== */
+.registry-stack { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+    padding: 0 16px; 
+}
+
+@media (min-width: 600px) {
+    .registry-stack { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
+}
+
+.registry-row {
+    background-color: #111725;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.registry-row.is-expanded { border-color: #3b82f6; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08); }
+.row-master-trigger { padding: 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.meta-zone { display: flex; flex-direction: column; gap: 6px; }
+.meta-zone h3 { margin: 0; font-size: 0.98rem; font-weight: 600; color: #f8fafc; }
+.meta-zone span { font-size: 0.7rem; color: #475569; display: flex; align-items: center; gap: 4px; }
+.quick-chips { display: flex; gap: 6px; margin-top: 4px; }
+.chip-item {
+    background-color: #090d16; border: 1px solid #1e293b;
+    padding: 3px 8px; border-radius: 4px; font-size: 0.72rem; color: #cbd5e1;
+}
+.trigger-arrow { color: #475569; font-size: 0.8rem; transition: transform 0.2s; }
+.registry-row.is-expanded .trigger-arrow { transform: rotate(180deg); color: #3b82f6; }
+
+/* ==========================================================================
+   5. EXPANDED ACCORDION DRAWER
+   ========================================================================== */
+.row-detail-drawer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #0b101c; }
+.registry-row.is-expanded .row-detail-drawer { max-height: 1200px; }
+.drawer-inner { padding: 16px; border-top: 1px solid #1e293b; display: flex; flex-direction: column; gap: 16px; }
+.stage-group-box { background-color: #111725; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; }
+.stage-title { font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; }
+.stage-nodes-flow { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.mini-node { background-color: #090d16; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; min-width: 55px; text-align: center; }
+.mini-node.hot-node { border-top: 2px solid #ef4444; }
+.mini-node.cool-node { border-top: 2px solid #3b82f6; }
+.n-temp { font-size: 0.95rem; font-weight: 700; color: #ffffff; }
+.n-time { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+
+/* ==========================================================================
+   6. TWO ACTION BUTTONS
+   ========================================================================== */
+.drawer-action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid #1e293b; padding-top: 14px; }
+.action-horizontal-btn { padding: 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-horizontal-delete {     background: linear-gradient(
+        145deg,
+        #f8fafc 0%,
+        #e2e8f0 20%,
+        #94a3b8 55%,
+        #cbd5e1 80%,
+        #f1f5f9 100%
+    );
+    color: #000000; }
+.btn-horizontal-open { 
+    background: linear-gradient(
+        145deg,
+        #f8fafc 0%,
+        #e2e8f0 20%,
+        #94a3b8 55%,
+        #cbd5e1 80%,
+        #f1f5f9 100%
+    );
+    color: #000000; 
+}
+
+/* ==========================================================================
+   7. UX UI LOADING & SPINNER
+   ========================================================================== */
+.ux-loading { text-align: center; color: #475569; padding: 40px 0; }
+.spinner { width: 24px; height: 24px; border: 2px solid #1e293b; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+@media (min-width: 400px) {
+    .search-wrapper { 
+        flex-direction: row; 
+        gap: 2px; /* Khoảng cách 2px chuẩn */
+    }
+    
+    .search-field { 
+        width: calc(60% - 1px); 
+    }
+    
+    #date-filter-select { 
+        width: calc(40% - 1px); 
+        /* Cần đảm bảo không có margin-left hoặc padding thừa */
+        margin-left: 0;
+        border-left: 1px solid #1e293b; /* Giữ viền để tạo cảm giác ngăn cách */
+        /* Nếu vẫn bị lệch, bỏ thuộc tính bo góc trái */
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    /* Đảm bảo ô tìm kiếm phía trên không bo góc phải khi nằm ngang */
+    .search-field input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+
+
+.registry-row .quick-chips {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.registry-row.is-expanded .quick-chips {
+    max-height: 50px; 
+    opacity: 1;
+    margin-top: 8px;
+}
+
+
+.row-detail-drawer { 
+    max-height: 0; 
+    opacity: 0;
+    overflow: hidden; 
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease; 
+}
+
+.registry-row.is-expanded .row-detail-drawer { 
+    max-height: 1200px; 
+    opacity: 1;
+    transition: max-height 0.3s ease-in, opacity 0.4s ease;
+}
+
+
+.trigger-arrow { 
+    color: #475569; 
+    font-size: 0.8rem; 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+
+
+
+
+
+
+
