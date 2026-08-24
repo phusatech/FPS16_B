@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>FPS-PCR — Update Protocol</title>
+    <link rel="apple-touch-icon" sizes="32x32" href="../../assets/ICON.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/ICON.png">
+    <link rel="stylesheet" href="pcr_update_protocol.css">
+</head>
+<body>
+
+    <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+    <main class="up-main" id="pcr-main" style="visibility:hidden">
+
+        <!-- ── Scrollable body ── -->
+        <div class="up-body">
+            <div class="up-inner">
+
+                <!-- Current protocol info -->
+                <div class="up-current-card">
+                    <div class="up-current-label">Current Protocol</div>
+                    <div class="up-current-name" id="up-current-name">—</div>
+                </div>
+
+                <!-- Page heading -->
+                <div class="up-heading">
+                    <div class="up-heading-title">Protocol Update</div>
+                    <div class="up-heading-sub" id="up-heading-sub">Checking for available protocols...</div>
+                </div>
+
+                <!-- STATE: Loading -->
+                <div id="st-loading" class="up-state-card">
+                    <div class="up-spinner"></div>
+                    <div class="st-label">Please wait</div>
+                </div>
+
+                <!-- STATE: Error -->
+                <div id="st-error" class="up-state-card" style="display:none">
+                    <div class="st-icon err">✕</div>
+                    <div class="st-label" id="st-error-msg">Could not fetch protocol list</div>
+                    <button class="up-retry-btn" id="btn-retry">Try again</button>
+                </div>
+
+                <!-- STATE: No files -->
+                <div id="st-empty" class="up-state-card" style="display:none">
+                    <div class="st-icon neutral">—</div>
+                    <div class="st-label">No protocols available</div>
+                    <div class="st-hint">The server has no protocol files at this time</div>
+                </div>
+
+                <!-- STATE: List -->
+                <div id="st-list" style="display:none">
+                    <div class="up-list" id="up-list"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── Bottom toolbar — always visible ── -->
+        <div class="up-toolbar">
+            <button class="up-btn-back"   id="btn-back">BACK</button>
+            <button class="up-btn-update" id="btn-update" style="display:none" disabled>UPDATE</button>
+        </div>
+
+    </main>
+
+    <!-- ── Progress / result modal ── -->
+    <div class="up-modal-overlay" id="up-modal" style="display:none">
+        <div class="up-modal-panel" id="up-modal-panel">
+            <div class="up-modal-icon" id="up-modal-icon">
+                <div class="up-spinner up-spinner-sm"></div>
+            </div>
+            <div class="up-modal-title" id="up-modal-title">Downloading...</div>
+            <div class="up-modal-sub"   id="up-modal-sub"></div>
+            <button class="up-modal-ok" id="up-modal-ok" style="display:none">OK</button>
+        </div>
+    </div>
+
+    <script src="../../components/header/header.js"></script>
+    <script src="../../core/socket_client.js" type="module"></script>
+    <script type="module" src="../../shared/PageRouter.js"></script>
+    <script src="pcr_update_protocol.js"></script>
+
+</body>
+</html>

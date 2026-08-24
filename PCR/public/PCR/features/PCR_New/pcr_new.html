@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="google" content="notranslate">
+  <title>FPS-PCR</title>
+  <link rel="apple-touch-icon"      sizes="32x32" href="../../assets/ICON.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/ICON.png">
+
+  <link rel="stylesheet" href="../PCR_Elements/style.css">
+  <link rel="stylesheet" href="pcr_new.css">
+  <link rel="stylesheet" href="../PCR_Elements/Create_UI.css">
+
+</head>
+<body>
+  <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+  <main class="pcr-main" id="pcr-main" style="visibility:hidden">
+    <div class="pcr-container">
+      <div id="new-progam-chart"    class="new-progam-chart-container">
+          <div id="pcr-new-list"    class="steps-container"></div> 
+          <div id="pcr-chart"       class="chart-container">
+    
+              <div class="chart-label">
+                  <span class="label-Sample-Temp">Sample Temp: 30°C</span>
+                  <div class="zoom-group">
+                    <button id="zoom-in" class="zoom-btn">
+                          <img src="../../assets/ZOOM_IN.png" class="zoom-icon" />
+                    </button>
+                    <button id="zoom-out" class="zoom-btn">
+                          <img src="../../assets/ZOOM_OUT.png" class="zoom-icon" />
+                    </button>
+                  </div>
+              </div>
+              
+              <div class="chart-row">
+                  <div class="chart-scroll"> 
+                     <div id="Temp-Chart"></div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="control-panel-new" class="tool-container"></div>
+    </div>
+  </main>
+
+<div id="protocolDrawer" class="protocol-drawer">
+
+    <div class="drawer-header">
+        <span>Protocol Information</span>
+        <button id="closeDrawer">✕</button>
+    </div>
+
+    <div class="drawer-content">
+
+        <!-- <div class="info-card">
+            <label>Protocol Name</label>
+            <span id="infoProtocolName">-</span>
+        </div>
+
+        <div class="info-card">
+            <label>Date Run</label>
+            <span id="infoDateRun">-</span>
+        </div>
+
+        <div class="info-card">
+            <label>Start Time</label>
+            <span id="infoStartTime">-</span>
+        </div>
+
+        <div class="info-card">
+            <label>Stop Time</label>
+            <span id="infoStopTime">-</span>
+        </div>
+
+        <div class="info-card">
+            <label>Total Time</label>
+            <span id="infoTotalTime">-</span>
+        </div>
+
+        <div class="notification-section">
+
+            <div class="section-title">
+                Notifications
+            </div>
+
+            <div id="notificationList"></div>
+
+        </div> -->
+
+        <div id="protocolInfoContainer"></div>
+        <div class="notification-section">
+
+            <div class="section-title">
+                Notifications
+            </div>
+
+            <div id="notificationList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+  <script src="../../../libs/amcharts5/index.js"></script>
+  <script src="../../../libs/amcharts5/xy.js"></script>
+  <script src="../../../libs/amcharts5/themes/Animated.js"></script>
+
+  <script src="../../components/header/header.js"></script> 
+  <script src="../../components/program/program.js"></script> 
+
+  <script src="../../shared/Data_config.js"></script>
+  <script src="../../shared/Convert.js"></script>
+  <script src="../../shared/Handle.js"></script>
+  <script type="module" src="../PCR_Elements/Update_UI.js"></script>
+
+  <script src="../../components/notification.js"></script>
+  <script src="../../components/Render_Managers.js"></script>
+  <script type="module" src="../../shared/PageRouter.js"></script>
+  <script type="module" src="../PCR_New/pcr_new.js"></script>
+  
+</body>
+</html>

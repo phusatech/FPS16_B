@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #090d16;
+    overflow: hidden;
+    font-family: "Inter", "Noto Serif", sans-serif;
+}
+
+/* ============================================================
+   MAIN BACKGROUND — same as pcr_base
+============================================================ */
+.pcr-main {
+    height: calc(100vh - 50px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background: radial-gradient(
+        circle at 50% 40%,
+        #0f1a2f 0%,
+        #070b14 60%,
+        #02040a 100%
+    );
+}
+
+/* luxury orbs */
+.pcr-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(99,102,241,0.45), transparent 38%),
+        radial-gradient(circle at 80% 70%, rgba(34,211,238,0.38), transparent 42%),
+        radial-gradient(circle at 50% 50%, rgba(59,130,246,0.25), transparent 55%);
+
+    animation: luxuryFloat 5s ease-in-out infinite;
+}
+
+/* silk sweep */
+.pcr-main::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    z-index: 0;
+    pointer-events: none;
+
+    background: linear-gradient(
+        120deg,
+        transparent 35%,
+        rgba(255,255,255,0.18),
+        rgba(99,102,241,0.32),
+        rgba(34,211,238,0.22),
+        transparent 65%
+    );
+
+    transform: rotate(25deg);
+    animation: silkSweep 4.5s linear infinite;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   CONTAINER
+============================================================ */
+.pcr-container {
+    position: relative;
+    z-index: 2;
+    width: min(400px, 88vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-top: 60px;
+    padding-bottom: 16px;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.pcr-header {
+    text-align: center;
+}
+
+.pcr-header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #f8fafc;
+    margin: 0;
+}
+
+.pcr-header p {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   MENU — vertical stack, same width as base buttons
+============================================================ */
+.admin-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ============================================================
+   CARD — styled like pcr-btn in pcr_base
+============================================================ */
+.admin-card {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 22px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        145deg,
+        #f8fafc 0%,
+        #e2e8f0 20%,
+        #94a3b8 55%,
+        #cbd5e1 80%,
+        #f1f5f9 100%
+    );
+
+    border: 1px solid rgba(148,163,184,0.35);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.7),
+        inset -2px -2px 6px rgba(0,0,0,0.15),
+        0 10px 28px rgba(0,0,0,0.5);
+
+    transition: all 0.25s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    border-color: rgba(99,102,241,0.5);
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.9),
+        0 20px 45px rgba(0,0,0,0.6),
+        0 0 18px rgba(99,102,241,0.25);
+}
+
+.admin-card:active {
+    transform: scale(0.98);
+}
+
+.admin-card img {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    filter: brightness(0.2) contrast(1.6) drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+}
+
+.admin-card span {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: #0f172a;
+}
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+.bottom-toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.back-btn {
+    width: min(200px, 60%);
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.18);
+
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.back-btn:hover {
+    color: #f8fafc;
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 0 18px rgba(255,255,255,0.1);
+}
+
+.back-btn:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes luxuryFloat {
+    0%   { transform: translateY(0)    scale(1);    opacity: 0.7; }
+    50%  { transform: translateY(-6px) scale(1.02); opacity: 1;   }
+    100% { transform: translateY(0)    scale(1);    opacity: 0.7; }
+}
+
+@keyframes silkSweep {
+    0%   { transform: translateX(-60%) rotate(25deg); opacity: 0; }
+    20%  { opacity: 1; }
+    50%  { opacity: 0.6; }
+    100% { transform: translateX(60%) rotate(25deg); opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE — phone
+============================================================ */
+@media (max-width: 480px) {
+    .pcr-container {
+        gap: 20px;
+    }
+
+    .admin-card {
+        height: 70px;
+        padding: 0 18px;
+    }
+
+    .admin-card img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .admin-card span {
+        font-size: 14px;
+    }
+
+    .back-btn {
+        height: 42px;
+        font-size: 13px;
+    }
+}

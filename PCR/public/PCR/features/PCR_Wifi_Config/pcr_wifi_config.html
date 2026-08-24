@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>FPS-PCR WIFI CONFIG</title>
+    <link rel="apple-touch-icon" sizes="32x32" href="../../assets/ICON.png">
+    <link rel="icon" type="image/png"   sizes="32x32" href="../../assets/ICON.png">
+    <link rel="stylesheet" href="pcr_wifi_config.css">
+</head>
+<body>
+
+    <div id="page-loading" class="page-loading"><div class="page-spinner"></div></div>
+    <main class="pcr-main" id="pcr-main" style="visibility:hidden">
+        <div class="pcr-container">
+
+            <!-- CONTENT -->
+            <div class="wifi-content">
+
+                <!-- LEFT: Status + Form -->
+                <div class="wifi-left">
+                    <div class="wifi-status-bar">
+                        <span id="wifi-status-label">Checking...</span>
+                    </div>
+
+                    <div class="wifi-form">
+                        <div class="wifi-group">
+                            <label for="wifi-ssid">SSID</label>
+                            <input type="text" id="wifi-ssid" placeholder="Enter SSID">
+                        </div>
+
+                        <div class="wifi-group">
+                            <label for="wifi-password">Password</label>
+                            <input type="password"
+                                   id="wifi-password"
+                                   placeholder="Enter Password"
+                                   autocomplete="new-password"
+                                   autocorrect="off"
+                                   autocapitalize="off"
+                                   spellcheck="false">
+                            <label class="showpass-row">
+                                <input type="checkbox" id="showPass">
+                                <span>Show password</span>
+                            </label>
+                        </div>
+
+                        <div class="wifi-btn-row">
+                            <button id="btnConnect" type="button">CONNECT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Scan List -->
+                <div class="wifi-right">
+                    <div class="wifi-scan-header">Available Networks</div>
+                    <ul id="wifi-list"></ul>
+                </div>
+
+            </div>
+
+            <!-- BACK BUTTON -->
+            <div class="bottom-toolbar">
+                <div id="btn-back" class="back-btn">BACK</div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../../core/api.js"          type="module"></script>
+    <script src="../../core/socket_client.js" type="module"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/notification.js"></script>
+    <script src="pcr_wifi_config.js"></script>
+
+</body>
+</html>
