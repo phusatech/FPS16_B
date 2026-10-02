@@ -219,7 +219,7 @@ body::after {
 
 .device-fields {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
   gap: 8px;
   align-items: end;
 }
@@ -333,6 +333,7 @@ body::after {
   outline: none; width: 100%;
   transition: border-color 0.2s, box-shadow 0.2s;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 .param-input::-webkit-inner-spin-button,
 .param-input::-webkit-outer-spin-button { opacity: 0.4; }

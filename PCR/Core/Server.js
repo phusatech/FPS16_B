@@ -1,17 +1,1 @@
-// Nhiệm vụ:
-
-// Tạo HTTP Server
-// Tạo Socket.IO
-// Start Express
-
-const Modbus_Process =
-require("./Modbus/Modbus_Process");
-
-const {InitServer
-}
-=
-require("./Core/Server");
-
-Modbus_Process.startSystem();
-
-InitServer();
+function _0x344d(_0x3d2832,_0x425334){_0x3d2832=_0x3d2832-0x10b;const _0x5179e4=_0x5179();let _0x344dd8=_0x5179e4[_0x3d2832];return _0x344dd8;}function _0x5179(){const _0x29b6ca=['118610LAtNyh','startSystem','4976pAAXxe','318MRfBHo','10361747JsHiVk','10dIjGNk','35544852kzQXHt','5542397vPSAps','12XHTKio','13401YwLHSo','./Modbus/Modbus_Process','143634NeECWw','81877quvfly','10bRCzZY'];_0x5179=function(){return _0x29b6ca;};return _0x5179();}const _0x454b2e=_0x344d;(function(_0x24763e,_0x58469a){const _0x5cf041=_0x344d,_0x11eca1=_0x24763e();while(!![]){try{const _0x5a77be=parseInt(_0x5cf041(0x113))/0x1*(-parseInt(_0x5cf041(0x114))/0x2)+-parseInt(_0x5cf041(0x112))/0x3*(-parseInt(_0x5cf041(0x10f))/0x4)+-parseInt(_0x5cf041(0x115))/0x5*(-parseInt(_0x5cf041(0x118))/0x6)+parseInt(_0x5cf041(0x10e))/0x7+-parseInt(_0x5cf041(0x117))/0x8*(-parseInt(_0x5cf041(0x110))/0x9)+parseInt(_0x5cf041(0x10c))/0xa*(parseInt(_0x5cf041(0x10b))/0xb)+-parseInt(_0x5cf041(0x10d))/0xc;if(_0x5a77be===_0x58469a)break;else _0x11eca1['push'](_0x11eca1['shift']());}catch(_0x1cd316){_0x11eca1['push'](_0x11eca1['shift']());}}}(_0x5179,0xa84c6));const Modbus_Process=require(_0x454b2e(0x111)),{InitServer}=require('./Core/Server');Modbus_Process[_0x454b2e(0x116)](),InitServer();

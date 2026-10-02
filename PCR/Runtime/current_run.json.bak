@@ -1,6 +1,6 @@
 {
-  "PagePath_Status": "PCR/features/PCR_Base/pcr_base.html",
-  "Tab_Status": "base",
+  "PagePath_Status": "PCR/features/PCR_New/pcr_new.html",
+  "Tab_Status": "new",
   "Option_Status": "new",
   "System_State": 0,
   "Show_UI_Block": 0,
@@ -16,7 +16,7 @@
   "Run_Start_Timestamp": 0,
   "Block": [
     93,
-    0,
+    93,
     66,
     25,
     25,
@@ -96,28 +96,8 @@
     18
   ],
   "Notifications": [],
-  "Target_Temperature_Array": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "Measured_Temperature_Array": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
+  "Target_Temperature_Array": [],
+  "Measured_Temperature_Array": [],
   "Runtime_State": {
     "Step_Setpoint": 0,
     "Step_Cnt": 0,
